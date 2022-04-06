@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "morse_code_generator_bot"
+version = "0.1.0"
+description = "Telegram bot that generates Morse codes as sound and text from input messages"
+authors = ["freetz13 <alexander.astafiev.1989@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+aiogram = "^2.19"
+numpy = "^1.22.3"
+lameenc = "^1.4.1"
+envparse = "^0.2.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
