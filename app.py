@@ -42,7 +42,7 @@ async def global_error_handler(update, exception):
 async def echo(message: types.Message):
     message_translated = morse.text_to_morse(message.text)
 
-    if not message_translated:
+    if not message_translated.strip():
         await message.answer(format_error(CANNOT_ENCODE), parse_mode='markdown')
     elif len(message_translated) > 1024:
         # TODO Split long messages into smaller ones
