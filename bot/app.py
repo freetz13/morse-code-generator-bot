@@ -5,7 +5,7 @@ from aiogram import Bot, Dispatcher, executor, types
 from aiogram.utils.exceptions import MessageError, MessageTextIsEmpty
 
 import morse
-from bot.config import Config
+from config import Config
 
 CANNOT_ENCODE = r"""Извините, не получилось закодировать это сообщение.
 
