@@ -2,7 +2,7 @@ import os
 import unittest
 import unittest.mock
 
-from config import Config
+from bot.config import Config
 from envparse import ConfigurationError
 
 TEST_TOKEN = "iamincorrectandnotexisting"
