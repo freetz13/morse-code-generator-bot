@@ -12,12 +12,13 @@ class Config:
 
     def __init__(self):
         self._token = env("TOKEN")
-        self.loglevel = env("LOGLEVEL", default="WARNING",
-                            postprocessor=self._postprocess_loglevel)
+        self.loglevel = env(
+            "LOGLEVEL", default="WARNING", postprocessor=self._postprocess_loglevel
+        )
         self._use_webhook = env.bool("USE_WEBHOOK", default=False)
 
         if self.use_webhook:
-            self._webhook_url = env('WEBHOOK_URL')
+            self._webhook_url = env("WEBHOOK_URL")
             self._webhook_path = env("WEBHOOK_PATH")
             self._host = env("WEBAPP_HOST", default="0.0.0.0")
             self._port = env.int("PORT")
@@ -39,8 +40,7 @@ class Config:
         value = value.upper()
         if value not in ("DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"):
             raise ValueError(
-                "LOGLEVEL should be either "
-                "DEBUG, INFO, WARNING, ERROR or CRITICAL"
+                "LOGLEVEL should be either DEBUG, INFO, WARNING, ERROR or CRITICAL"
             )
         return value
 

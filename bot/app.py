@@ -2,7 +2,6 @@ import logging
 from io import BytesIO
 
 from aiogram import Bot, Dispatcher, executor, types
-from aiogram.utils.exceptions import MessageError, MessageTextIsEmpty
 
 import morse
 from config import Config
@@ -20,7 +19,7 @@ MSG_TOO_LONG = "Извините, это сообщение получилось
 
 config = Config()
 logging.basicConfig(
-    format='%(asctime)s - %(levelname)s - %(name)s - %(message)s',
+    format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
     level=config.loglevel,
 )
 logger = logging.getLogger(__name__)
@@ -43,7 +42,7 @@ async def echo(message: types.Message):
     message_translated = morse.text_to_morse(message.text)
 
     if not message_translated.strip():
-        await message.answer(format_error(CANNOT_ENCODE), parse_mode='markdown')
+        await message.answer(format_error(CANNOT_ENCODE), parse_mode="markdown")
     elif len(message_translated) > 1024:
         # TODO Split long messages into smaller ones
         await message.answer(format_error(MSG_TOO_LONG))
@@ -76,8 +75,10 @@ def main():
             dispatcher=dispatcher,
             webhook_path=config.webhook_path,
             skip_updates=True,
-            on_startup=on_startup, on_shutdown=on_shutdown,
-            host=config.host, port=config.port
+            on_startup=on_startup,
+            on_shutdown=on_shutdown,
+            host=config.host,
+            port=config.port,
         )
     else:
         logger.debug("Using polling")

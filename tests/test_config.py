@@ -39,33 +39,37 @@ class TestBasic(unittest.TestCase):
 
 
 class TestWebhook(unittest.TestCase):
-    @unittest.mock.patch.dict(os.environ, {
-        "TOKEN": TEST_TOKEN,
-        "USE_WEBHOOK": "True",
-    })
+    @unittest.mock.patch.dict(
+        os.environ,
+        {
+            "TOKEN": TEST_TOKEN,
+            "USE_WEBHOOK": "True",
+        },
+    )
     def test_incomplete_config_will_fail(self):
         with self.assertRaises(ConfigurationError):
             config = Config()
 
-    @unittest.mock.patch.dict(os.environ, {
-        "TOKEN": TEST_TOKEN,
-        "USE_WEBHOOK": "True",
-        "WEBHOOK_URL": "http://example.com",
-        "WEBHOOK_PATH": "/path/to/webhook/",
-        "PORT": "9999",
-    })
+    @unittest.mock.patch.dict(
+        os.environ,
+        {
+            "TOKEN": TEST_TOKEN,
+            "USE_WEBHOOK": "True",
+            "WEBHOOK_URL": "http://example.com",
+            "WEBHOOK_PATH": "/path/to/webhook/",
+            "PORT": "9999",
+        },
+    )
     def test_complete_config_will_success(self):
         config = Config()
 
 
 class TestConfigLoglevel(unittest.TestCase):
-    @unittest.mock.patch.dict(
-        os.environ, {"TOKEN": TEST_TOKEN, "LOGLEVEL": "True"}
-    )
+    @unittest.mock.patch.dict(os.environ, {"TOKEN": TEST_TOKEN, "LOGLEVEL": "True"})
     def test_invalid_loglevel_fails(self):
         with self.assertRaises(ValueError):
             config = Config()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
