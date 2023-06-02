@@ -1,5 +1,6 @@
 import logging
 from io import BytesIO
+import json
 
 from aiogram import Bot, Dispatcher, executor, types
 
@@ -66,6 +67,18 @@ async def on_startup(dp):
 
 async def on_shutdown(dp):
     pass
+
+
+async def handler(event, context):
+    """Yandex.Cloud functions handler."""
+
+    if event["httpMethod"] == "POST":
+        update = json.loads(event["body"])
+        update = types.Update.to_object(update)
+        await dispatcher.process_update(update)
+
+        return {"statusCode": 200, "body": "ok"}
+    return {"statusCode": 405}
 
 
 def main():
